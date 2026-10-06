@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/navbar :: head('Dashboard - Biblioteca Kinal')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container py-3">
+    <!-- Encabezado de Bienvenida -->
+    <div class="card-custom p-4 mb-4 bg-white">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+                <h3 class="fw-bold mb-1 text-dark">
+                    ¡Bienvenido, <span th:text="${session.usuarioLogueado}">Usuario</span>! 👋
+                </h3>
+                <p class="text-muted mb-0">Panel de control de la Biblioteca Kinal. Gestiona libros, préstamos y usuarios.</p>
+            </div>
+            <div>
+                <a th:href="@{/prestamos/nuevo}" class="btn btn-warning fw-semibold rounded-pill px-4 py-2 shadow-sm">
+                    <i class="bi bi-plus-circle me-1"></i> Solicitar Préstamo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Estadísticas (KPIs) -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card-custom p-4 text-center border-start border-4 border-primary">
+                <i class="bi bi-journal-bookmark text-primary fs-1 mb-2"></i>
+                <h2 class="fw-bold mb-0" th:text="${totalLibros}">0</h2>
+                <span class="text-muted small">Libros Registrados</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-custom p-4 text-center border-start border-4 border-success">
+                <i class="bi bi-arrow-left-right text-success fs-1 mb-2"></i>
+                <h2 class="fw-bold mb-0" th:text="${totalPrestamos}">0</h2>
+                <span class="text-muted small">Préstamos Totales</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-custom p-4 text-center border-start border-warning">
+                <i class="bi bi-people text-warning fs-1 mb-2"></i>
+                <h2 class="fw-bold mb-0" th:text="${totalSocios}">0</h2>
+                <span class="text-muted small">Socios Afiliados</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-custom p-4 text-center border-start border-4 border-info">
+                <i class="bi bi-pen text-info fs-1 mb-2"></i>
+                <h2 class="fw-bold mb-0" th:text="${totalAutores}">0</h2>
+                <span class="text-muted small">Autores en Catálogo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accesos Directos -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card-custom p-4 h-100">
+                <h5 class="fw-bold mb-3"><i class="bi bi-book me-2 text-primary"></i>Catálogo de Libros</h5>
+                <p class="text-muted small">Consulta el catálogo disponible, el stock de copias en tiempo real y sus autores.</p>
+                <div class="d-flex gap-2">
+                    <a th:href="@{/libros}" class="btn btn-primary rounded-pill btn-sm px-3">Ver Libros</a>
+                    <a th:if="${session.rolUsuario == 'ADMINISTRADOR'}" th:href="@{/libros/nuevo}" class="btn btn-outline-primary rounded-pill btn-sm px-3">Nuevo Libro</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-custom p-4 h-100">
+                <h5 class="fw-bold mb-3"><i class="bi bi-arrow-repeat me-2 text-success"></i>Módulo de Préstamos</h5>
+                <p class="text-muted small">Registra nuevos préstamos y devoluciones con descuento automático de inventario.</p>
+                <div class="d-flex gap-2">
+                    <a th:href="@{/prestamos}" class="btn btn-success rounded-pill btn-sm px-3">Ver Préstamos</a>
+                    <a th:href="@{/prestamos/nuevo}" class="btn btn-outline-success rounded-pill btn-sm px-3">Realizar Préstamo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

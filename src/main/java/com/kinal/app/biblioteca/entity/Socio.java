@@ -1,0 +1,80 @@
+package com.kinal.app.biblioteca.entity;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+
+@Entity
+@Table (name = "socios")
+public class Socio {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column
+    private Long id;
+    @Column
+    private String nombre;
+    @Column (unique = true)
+    private String email;
+    @Column
+    private String telefono;
+    @Column (name = "fecha_registro")
+    private LocalDate fechaRegistro;
+
+    public Socio() {
+    }
+
+    public Socio(String nombre, String email, String telefono, LocalDate fechaRegistro) {
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Socio(Long id, String nombre, String email, String telefono, LocalDate fechaRegistro) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+}

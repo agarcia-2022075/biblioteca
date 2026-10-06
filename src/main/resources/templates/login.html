@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Biblioteca Kinal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        .card-login {
+            max-width: 440px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            overflow: hidden;
+        }
+        .header-login {
+            background-color: #0d233a;
+            color: white;
+            padding: 2.2rem 1.5rem;
+            text-align: center;
+        }
+        .btn-kinal {
+            background-color: #e67e22;
+            color: white;
+            border-radius: 2rem;
+            font-weight: 600;
+            padding: 0.75rem;
+            transition: all 0.3s;
+        }
+        .btn-kinal:hover {
+            background-color: #d35400;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<div class="card-login">
+    <div class="header-login">
+        <i class="bi bi-book-half" style="font-size: 3rem; color: #f39c12;"></i>
+        <h2 class="mt-2 mb-0 fw-bold">Biblioteca Kinal</h2>
+        <small class="text-white-50">Sistema Integral de Préstamos</small>
+    </div>
+
+    <div class="p-4">
+        <!-- Alertas -->
+        <div th:if="${param.error}" class="alert alert-danger py-2 small" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-1"></i> Usuario o contraseña incorrectos.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success py-2 small" role="alert">
+            <i class="bi bi-check-circle-fill me-1"></i> Sesión cerrada exitosamente.
+        </div>
+        <div th:if="${param.registroExitoso}" class="alert alert-info py-2 small" role="alert">
+            <i class="bi bi-check2-circle me-1"></i> Cuenta creada. Inicia sesión para continuar.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label text-muted small fw-semibold">USUARIO</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="admin o user" required autofocus>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label text-muted small fw-semibold">CONTRASEÑA</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="admin123 o user123" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-kinal w-100 shadow-sm mb-3">
+                <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar Sesión
+            </button>
+        </form>
+
+        <a th:href="@{/registro}" class="btn btn-outline-secondary w-100 rounded-pill py-2 small">
+            <i class="bi bi-person-plus me-1"></i> ¿No tienes cuenta? Regístrate aquí
+        </a>
+
+        <div class="card bg-light border-0 mt-4 p-2 text-center text-muted" style="font-size: 0.78rem;">
+            <strong>Credenciales Rápidas para Examen:</strong>
+            <span>Admin: <code>admin</code> / <code>admin123</code></span>
+            <span>Lector: <code>user</code> / <code>user123</code></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

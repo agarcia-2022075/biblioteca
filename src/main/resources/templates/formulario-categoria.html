@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/navbar :: head('Formulario de Categoría - Biblioteca Kinal')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container py-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card-custom p-4">
+                <h4 class="fw-bold mb-3 text-dark">
+                    <i class="bi bi-tag text-warning me-2"></i>
+                    <span th:text="${categoria.id == null ? 'Nueva Categoría' : 'Editar Categoría'}">Categoría</span>
+                </h4>
+
+                <form th:action="@{/categorias/guardar}" th:object="${categoria}" method="post">
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="mb-4">
+                        <label class="form-label text-muted small fw-semibold">Nombre de la Categoría</label>
+                        <input type="text" class="form-control" th:field="*{nombre}" placeholder="Ej: Ciencia Ficción, Historia" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a th:href="@{/categorias}" class="btn btn-outline-secondary rounded-pill px-4">Cancelar</a>
+                        <button type="submit" class="btn btn-warning rounded-pill px-4 fw-semibold">Guardar Categoría</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
